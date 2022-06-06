@@ -5,9 +5,11 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "types": [
+      "node"
+    ]
   },
-
   "references": [
     {
       "path": "./tsconfig.vite-config.json"

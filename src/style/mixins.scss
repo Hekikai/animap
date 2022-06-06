@@ -1,0 +1,11 @@
+@mixin imageContainer {
+  height: 100%;
+  width: 100%;
+  overflow-y: hidden;
+
+  &__image {
+    @extend .container;
+    height: auto;
+    min-width: inherit;
+  }
+}
