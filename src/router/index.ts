@@ -1,8 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router';
-import TheAuthenticationPage from "@/pages/auth/TheAuthenticationPage.vue";
+import EntryPage from "@/pages/auth/EntryPage.vue";
 import LoginForm from "@/components/LoginForm.vue";
 import RegistrationForm from "@/components/RegistrationForm.vue";
-import theAuthenticationPage from "@/pages/auth/TheAuthenticationPage.vue";
 
 const routes = [
     {
@@ -11,7 +10,7 @@ const routes = [
     },
     {
         path: '/login',
-        component: TheAuthenticationPage,
+        component: EntryPage,
         name: 'LoginPage',
         children: [
             {
@@ -22,8 +21,8 @@ const routes = [
         ],
     },
     {
-        path: '/register',
-        component: theAuthenticationPage,
+        path: '/registration',
+        component: EntryPage,
         name: 'RegistrationPage',
         children: [
             {

@@ -10,7 +10,7 @@ import {defineComponent} from "vue";
 import backgroundImage from '../../assets/images/background.jpg';
 
 export default defineComponent({
-	name: "TheAuthenticationPage",
+	name: "EntryPage",
 	setup() {
 		return {
 			backgroundImage
@@ -21,10 +21,17 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-@import "src/style/mixins";
 
 .container {
-	@include imageContainer;
+	height: 100%;
+	width: 100%;
+	overflow-y: hidden;
+	user-select: none;
+
+	&__image {
+		height: auto;
+		min-width: inherit;
+	}
 }
 
 </style>
