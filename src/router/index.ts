@@ -2,6 +2,7 @@ import {createRouter, createWebHistory} from 'vue-router';
 import EntryPage from "@/pages/auth/EntryPage.vue";
 import LoginForm from "@/components/LoginForm.vue";
 import RegistrationForm from "@/components/RegistrationForm.vue";
+import RestorePasswordForm from "@/components/RestorePasswordForm.vue";
 
 const routes = [
     {
@@ -17,6 +18,11 @@ const routes = [
                 path: '',
                 component: LoginForm,
                 name: 'LoginForm'
+            },
+            {
+                path: '/restore',
+                component: RestorePasswordForm,
+                name: 'RestorePasswordForm'
             }
         ],
     },

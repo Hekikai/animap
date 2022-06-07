@@ -11,7 +11,7 @@
 				<a-form-item
 						label="Username"
 						name="username"
-						:rules="[{ required: true, message: 'Please input your username!' }]"
+						:rules="[{ required: true, message: 'Please, we need your username!' }]"
 				>
 					<a-input v-model:value="formState.username"></a-input>
 				</a-form-item>
@@ -19,7 +19,7 @@
 				<a-form-item
 						label="Password"
 						name="password"
-						:rules="[{ required: true, message: 'Please input your password!' }]"
+						:rules="[{ required: true, message: 'Please, we need your password!' }]"
 				>
 					<a-input-password v-model:value="formState.password"></a-input-password>
 				</a-form-item>
@@ -28,7 +28,7 @@
 					<a-form-item name="remember" no-style>
 						<a-checkbox v-model:checked="formState.remember">Remember me</a-checkbox>
 					</a-form-item>
-					<a class="wrapper__link" href="">Forgot password?</a>
+					<router-link :to="handleRestorePassword()">Forgot password?</router-link>
 				</div>
 
 				<div class="wrapper">
@@ -37,7 +37,7 @@
 							Log in
 						</a-button>
 					</a-form-item>
-					<router-link to="/registration" >Or register now!</router-link>
+					<router-link to="/registration">Or register now!</router-link>
 				</div>
 			</a-form>
 		</div>
@@ -70,11 +70,14 @@ export default defineComponent({
 			return !(formState.username && formState.password);
 		});
 
+		const handleRestorePassword = () => ({path: '/restore'})
+
 		return {
 			formState,
 			onFinish,
 			onFinishFailed,
 			disabled,
+			handleRestorePassword
 		};
 	}
 });
