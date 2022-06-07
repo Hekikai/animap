@@ -7,6 +7,7 @@
 					class="modal__form"
 					@finish="onFinish"
 					@finishFailed="onFinishFailed"
+					@submit="handleSubmitForm"
 			>
 				<a-form-item
 						label="Username"
@@ -37,6 +38,11 @@
 							Log in
 						</a-button>
 					</a-form-item>
+					<a-form-item>
+						<a-button @click="handleLogout" :disabled="disabled" type="primary">
+							Logout
+						</a-button>
+					</a-form-item>
 					<router-link to="/registration">Or register now!</router-link>
 				</div>
 			</a-form>
@@ -45,26 +51,33 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive, computed} from "vue";
+import {defineComponent, reactive, computed, toRaw} from "vue";
 import type {Form} from "@/types/form";
+import {useAuth} from "@/stores/useAuth";
 
 
 export default defineComponent({
 	name: 'LoginForm',
 	setup() {
+		const store = useAuth();
+
 		const formState = reactive<Form>({
-			username: '',
-			password: '',
-			remember: true
+			username: 'user_dev',
+			password: 'dev'
 		});
 
 		const onFinish = (values: any) => {
-			console.log('Success:', values);
 		};
 
 		const onFinishFailed = (errorInfo: any) => {
 			console.log('Failed:', errorInfo);
 		};
+
+		const handleSubmitForm = (event: Event) => {
+			store.login(toRaw(formState));
+		};
+
+		const handleLogout = () => store.logout();
 
 		const disabled = computed(() => {
 			return !(formState.username && formState.password);
@@ -77,7 +90,9 @@ export default defineComponent({
 			onFinish,
 			onFinishFailed,
 			disabled,
-			handleRestorePassword
+			handleRestorePassword,
+			handleSubmitForm,
+			handleLogout
 		};
 	}
 });
