@@ -3,6 +3,7 @@ import EntryPage from "@/pages/auth/EntryPage.vue";
 import LoginForm from "@/components/LoginForm.vue";
 import RegistrationForm from "@/components/RegistrationForm.vue";
 import RestorePasswordForm from "@/components/RestorePasswordForm.vue";
+import MainPage from "@/pages/main/MainPage.vue";
 
 const routes = [
     {
@@ -38,6 +39,11 @@ const routes = [
             }
         ]
 
+    },
+    {
+        path: '/animap',
+        component: MainPage,
+        name: 'MainPage'
     }
 
 ];

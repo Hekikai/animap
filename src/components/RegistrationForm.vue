@@ -1,33 +1,42 @@
 <template>
 	<teleport to="#app">
+		<a-modal v-model:visible="visible"
+						 title="Oops.."
+						 @ok="handleCloseModal($refs.form)"
+						 @cancel="handleCloseModal($refs.form)">
+			<p>
+				{{ errorInfo }}
+			</p>
+		</a-modal>
 		<div class="modal">
 			<a-form
+					ref="form"
 					:model="formState"
+					:rules="rules"
 					name="basic"
-					autocomplete="on"
-					@finish="onFinish"
-					@finishFailed="onFinishFailed"
+					@validate="handleValidate"
+					@submit="handleSubmit"
 			>
 				<a-form-item
+						has-feedback
 						label="Username"
 						name="username"
-						:rules="[{ required: true, message: 'Please input your username!' }]"
 				>
 					<a-input v-model:value="formState.username"/>
 				</a-form-item>
 
 				<a-form-item
+						has-feedback
 						label="Email"
 						name="email"
-						:rules="[{ required: true, message: 'Please input your username!' }]"
 				>
 					<a-input v-model:value="formState.email"/>
 				</a-form-item>
 
 				<a-form-item
+						has-feedback
 						label="Password"
 						name="password"
-						:rules="[{ required: true, message: 'Please input your password!' }]"
 				>
 					<a-input-password v-model:value="formState.password"/>
 				</a-form-item>
@@ -46,35 +55,70 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent, reactive} from "vue";
-import type {Form} from "@/types/form";
+import {defineComponent, reactive} from "vue";
+import type {Registration, ValidatedFields} from "@/types/form";
+import type {Rule} from "ant-design-vue/es/form";
+import AuthService from "@/services/auth.service";
+import {useSubmit} from "@/utils/useSubmit";
+import {useValidatedFieldsWithButton} from "@/utils/useValidatedFieldsWithButton";
 
 export default defineComponent({
 	name: 'RegistrationForm',
 	setup() {
-		const formState = reactive<Form>({
+
+		const formState = reactive<Registration>({
 			username: '',
-			email: '',
 			password: '',
+			email: '',
 		});
 
-		const onFinish = (values: any) => {
-			console.log('Success:', values);
-		};
-
-		const onFinishFailed = (errorInfo: any) => {
-			console.log('Failed:', errorInfo);
-		};
-
-		const disabled = computed(() => {
-			return !(formState.username && formState.password && formState.email);
+		const areFieldsValidated = reactive<ValidatedFields>({
+			username: false,
+			email: false,
+			password: false
 		});
+
+		const {
+			visible,
+			errorInfo,
+			handleSubmit,
+			handleCloseModal
+		} = useSubmit(formState, AuthService.register,
+				'/login', 'Something went wrong...');
+
+		const {handleValidate, disabled} = useValidatedFieldsWithButton(areFieldsValidated);
+
+		const rules: Record<string, Rule[]> = {
+			username: [{
+				required: true,
+				min: 5,
+				message: 'Must be more than 5 symbols',
+				trigger: 'change'
+			},],
+			email: [{
+				required: true,
+				pattern:
+						/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+				message: 'Incorrect email',
+				trigger: 'change'
+			}],
+			password: [{
+				required: true,
+				min: 5,
+				message: 'Must be more than 5 symbols',
+				trigger: 'change'
+			}],
+		}
 
 		return {
 			formState,
-			onFinish,
-			onFinishFailed,
-			disabled
+			disabled,
+			visible,
+			errorInfo,
+			rules,
+			handleSubmit,
+			handleValidate,
+			handleCloseModal
 		};
 	}
 })
@@ -95,7 +139,6 @@ export default defineComponent({
 		:first-child {
 			width: 100%;
 		}
-
 	}
 }
 

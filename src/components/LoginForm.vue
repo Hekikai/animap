@@ -1,13 +1,20 @@
 <template>
 	<teleport to="#app">
+		<a-modal v-model:visible="visible"
+						 title="Oops.."
+						 @ok="handleCloseModal($refs.form)"
+						 @cancel="handleCloseModal($refs.form)">
+			<p>
+				{{ errorInfo }}
+			</p>
+		</a-modal>
 		<div class="modal">
 			<a-form
+					ref="form"
 					:model="formState"
 					name="normal_login"
 					class="modal__form"
-					@finish="onFinish"
-					@finishFailed="onFinishFailed"
-					@submit="handleSubmitForm"
+					@submit="handleSubmit"
 			>
 				<a-form-item
 						label="Username"
@@ -51,33 +58,40 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive, computed, toRaw} from "vue";
-import type {Form} from "@/types/form";
-import {useAuth} from "@/stores/useAuth";
-
+import {defineComponent, reactive, computed} from "vue";
+import type {Login} from "@/types/form";
+import AuthService from "@/services/auth.service";
+import router from "@/router";
+import {useSubmit} from "@/utils/useSubmit";
 
 export default defineComponent({
 	name: 'LoginForm',
-	setup() {
-		const store = useAuth();
 
-		const formState = reactive<Form>({
-			username: 'user_dev',
-			password: 'dev'
+	setup() {
+
+		const formState = reactive<Login>({
+			username: '',
+			password: ''
 		});
 
-		const onFinish = (values: any) => {
-		};
+		const {
+			visible,
+			errorInfo,
+			handleSubmit,
+			handleCloseModal
+		} = useSubmit(formState, AuthService.login, '/animap');
 
-		const onFinishFailed = (errorInfo: any) => {
-			console.log('Failed:', errorInfo);
-		};
 
-		const handleSubmitForm = (event: Event) => {
-			store.login(toRaw(formState));
-		};
-
-		const handleLogout = () => store.logout();
+		// TODO: Extract it into a separate file or implement into the personal area
+		const handleLogout = () => AuthService.logout().then(
+				() => {
+					router.push({path: '/login'});
+				},
+				(error) => {
+					visible.value = true;
+					errorInfo.value = error.message;
+				}
+		);
 
 		const disabled = computed(() => {
 			return !(formState.username && formState.password);
@@ -87,12 +101,13 @@ export default defineComponent({
 
 		return {
 			formState,
-			onFinish,
-			onFinishFailed,
 			disabled,
+			visible,
+			errorInfo,
 			handleRestorePassword,
-			handleSubmitForm,
-			handleLogout
+			handleSubmit,
+			handleLogout,
+			handleCloseModal
 		};
 	}
 });
