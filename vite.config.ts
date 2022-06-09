@@ -20,9 +20,10 @@ export default defineConfig({
         preprocessorOptions: {
             less: {
                 modifyVars: {
-                    'primary-color': '#1DA57A',
-                    'link-color': '#1DA57A',
-                    'border-radius-base': '2px',
+                    'primary-color': '#2E8B56',
+                    'link-color': '#000',
+                    'link-hover-color': '#2E8B56',
+                    'border-radius-base': '4px',
                     'font-size-base': '20px'
                 },
                 javascriptEnabled: true

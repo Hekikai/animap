@@ -1,8 +1,9 @@
 import {createRouter, createWebHistory} from 'vue-router';
-import TheAuthenticationPage from "@/pages/auth/TheAuthenticationPage.vue";
+import EntryPage from "@/pages/auth/EntryPage.vue";
 import LoginForm from "@/components/LoginForm.vue";
 import RegistrationForm from "@/components/RegistrationForm.vue";
-import theAuthenticationPage from "@/pages/auth/TheAuthenticationPage.vue";
+import RestorePasswordForm from "@/components/RestorePasswordForm.vue";
+import MainPage from "@/pages/main/MainPage.vue";
 
 const routes = [
     {
@@ -11,19 +12,24 @@ const routes = [
     },
     {
         path: '/login',
-        component: TheAuthenticationPage,
+        component: EntryPage,
         name: 'LoginPage',
         children: [
             {
                 path: '',
                 component: LoginForm,
                 name: 'LoginForm'
+            },
+            {
+                path: '/restore',
+                component: RestorePasswordForm,
+                name: 'RestorePasswordForm'
             }
         ],
     },
     {
-        path: '/register',
-        component: theAuthenticationPage,
+        path: '/registration',
+        component: EntryPage,
         name: 'RegistrationPage',
         children: [
             {
@@ -33,6 +39,11 @@ const routes = [
             }
         ]
 
+    },
+    {
+        path: '/animap',
+        component: MainPage,
+        name: 'MainPage'
     }
 
 ];
