@@ -125,7 +125,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-@import "src/style/mixins";
+@import "../../style/mixins";
 
 .modal {
 	@include modalWindow;

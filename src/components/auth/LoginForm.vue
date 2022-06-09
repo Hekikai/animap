@@ -45,11 +45,6 @@
 							Log in
 						</a-button>
 					</a-form-item>
-					<a-form-item>
-						<a-button @click="handleLogout" :disabled="disabled" type="primary">
-							Logout
-						</a-button>
-					</a-form-item>
 					<router-link to="/registration">Or register now!</router-link>
 				</div>
 			</a-form>
@@ -58,10 +53,9 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive, computed} from "vue";
+import {computed, defineComponent, reactive} from "vue";
 import type {Login} from "@/types/form";
 import AuthService from "@/services/auth.service";
-import router from "@/router";
 import {useSubmit} from "@/utils/useSubmit";
 
 export default defineComponent({
@@ -79,34 +73,21 @@ export default defineComponent({
 			errorInfo,
 			handleSubmit,
 			handleCloseModal
-		} = useSubmit(formState, AuthService.login, '/animap');
-
-
-		// TODO: Extract it into a separate file or implement into the personal area
-		const handleLogout = () => AuthService.logout().then(
-				() => {
-					router.push({path: '/login'});
-				},
-				(error) => {
-					visible.value = true;
-					errorInfo.value = error.message;
-				}
-		);
+		} = useSubmit(formState, AuthService.login, '/profile');
 
 		const disabled = computed(() => {
 			return !(formState.username && formState.password);
-		});
+		})
 
 		const handleRestorePassword = () => ({path: '/restore'})
 
 		return {
 			formState,
-			disabled,
 			visible,
 			errorInfo,
+			disabled,
 			handleRestorePassword,
 			handleSubmit,
-			handleLogout,
 			handleCloseModal
 		};
 	}
@@ -116,8 +97,8 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-@import '../style/variables';
-@import '../style/mixins';
+@import '../../style/variables';
+@import '../../style/mixins';
 
 .modal {
 
