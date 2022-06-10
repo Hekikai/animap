@@ -56,7 +56,7 @@
 import {computed, defineComponent, reactive} from "vue";
 import type {Login} from "@/types/form";
 import AuthService from "@/services/auth.service";
-import {useSubmit} from "@/utils/useSubmit";
+import {useSubmit} from "@/utils/hooks/useSubmit";
 
 export default defineComponent({
 	name: 'LoginForm',

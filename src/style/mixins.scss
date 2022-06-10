@@ -1,3 +1,5 @@
+@import './variables';
+
 @mixin modalWindow {
   position: absolute;
   left: 50%;
@@ -6,4 +8,9 @@
   background-color: white;
   padding: 40px;
   border-radius: 4px;
+}
+
+@mixin wrapperNearSidebar {
+  margin: 0 0 0 $sidebarWidth;
+  min-height: 100%;
 }

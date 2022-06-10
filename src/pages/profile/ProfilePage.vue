@@ -1,9 +1,11 @@
 <template>
-	<div>
-		Profile page!
-		<a-button @click="handleLogout" type="warning">
-			Logout
-		</a-button>
+	<div :class="$attrs.class">
+		<div>
+			Profile page!
+			<a-button @click="handleLogout" type="warning">
+				Logout
+			</a-button>
+		</div>
 	</div>
 </template>
 
@@ -32,6 +34,12 @@ export default defineComponent({
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import "../src/style/variables";
+@import '../src/style/mixins';
+
+.wrapper {
+ @include wrapperNearSidebar;
+}
 
 </style>
