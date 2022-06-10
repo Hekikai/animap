@@ -59,8 +59,8 @@ import {defineComponent, reactive} from "vue";
 import type {Registration, ValidatedFields} from "@/types/form";
 import type {Rule} from "ant-design-vue/es/form";
 import AuthService from "@/services/auth.service";
-import {useSubmit} from "@/utils/useSubmit";
-import {useValidatedFieldsWithButton} from "@/utils/useValidatedFieldsWithButton";
+import {useSubmit} from "@/utils/hooks/useSubmit";
+import {useValidatedFieldsWithButton} from "@/utils/hooks/useValidatedFieldsWithButton";
 
 export default defineComponent({
 	name: 'RegistrationForm',
