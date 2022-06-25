@@ -1,20 +1,19 @@
 <template>
 	<the-header/>
-	<router-view/>
+	<the-sidebar/>
+	<router-view class="wrapper"/>
 </template>
 
 <script lang="ts">
 import {defineComponent} from "vue";
 import TheHeader from "@/components/TheHeader.vue";
+import TheSidebar from "@/components/TheSidebar.vue";
 
 export default defineComponent({
-	name: '',
+	name: 'ContentWrapper',
 	components: {
-		TheHeader
-	},
-
-	setup() {
-
+		TheHeader,
+		TheSidebar
 	}
 })
 </script>

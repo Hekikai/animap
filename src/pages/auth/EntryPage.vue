@@ -30,7 +30,8 @@ export default defineComponent({
 
 	&__image {
 		height: auto;
-		min-width: inherit;
+		min-width: 100vw;
+		filter: blur(8px)
 	}
 }
 

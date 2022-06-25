@@ -7,7 +7,7 @@ import MainPage from "@/pages/main/MainPage.vue";
 import TokenService from "@/services/token.service";
 import ContentWrapper from "@/components/ContentWrapper.vue";
 import PathNotFoundPage from "@/pages/PathNotFoundPage.vue";
-import ProfilePage from "@/pages/account/ProfilePage.vue";
+import ProfilePage from "@/pages/profile/ProfilePage.vue";
 
 const routes = [
     {

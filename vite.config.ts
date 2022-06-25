@@ -20,11 +20,14 @@ export default defineConfig({
         preprocessorOptions: {
             less: {
                 modifyVars: {
+                    // $mainGreen
                     'primary-color': '#2E8B56',
                     'link-color': '#000',
                     'link-hover-color': '#2E8B56',
                     'border-radius-base': '4px',
-                    'font-size-base': '20px'
+                    'font-size-base': '20px',
+                    // $extraLightGreen
+                    'body-background': '#A6D5AE',
                 },
                 javascriptEnabled: true
             }

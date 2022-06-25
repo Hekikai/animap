@@ -1,21 +1,24 @@
 import {axiosInstance} from "@/services/api/api";
 import router from "@/router";
 import TokenService from "@/services/token.service";
-import axios, {type AxiosRequestConfig} from "axios";
+import type {AxiosRequestConfig} from "axios";
 
 export const setupInterceptors = () => {
     axiosInstance.interceptors.request.use(
-        (response: AxiosRequestConfig) => {
+        (requestConfig: AxiosRequestConfig) => {
             const publicPages = ['/login', '/registration', '/login/restore'];
 
-            if (!publicPages.includes(response.url!)) {
+            if (!publicPages.includes(requestConfig.url!)) {
                 const token = TokenService.getAccessToken();
-                if (token && axios.defaults.headers !== null) {
-                    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+                if (!requestConfig?.headers) {
+                    throw new Error(`Expected 'config' and 'config.headers' not to be undefined`);
+                } else if (token) {
+                    requestConfig.headers.Authorization = `Bearer ${token}`;
                 }
             }
 
-            return response;
+            return requestConfig;
         },
         (error: any) => {
             return Promise.reject(error);

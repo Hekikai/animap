@@ -1,10 +1,7 @@
 <template>
-	<div>
-		Profile page!
-		<a-button @click="handleLogout" type="warning">
-			Logout
-		</a-button>
-	</div>
+	<a-button @click="handleLogout" type="warning">
+		Logout
+	</a-button>
 </template>
 
 <script lang="ts">
@@ -13,7 +10,7 @@ import AuthService from "@/services/auth.service";
 import router from "@/router";
 
 export default defineComponent({
-	name: '',
+	name: 'LogoutButton',
 	setup() {
 
 		const handleLogout = () => AuthService.logout().then(

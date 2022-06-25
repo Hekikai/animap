@@ -21,7 +21,12 @@
 						name="username"
 						:rules="[{ required: true, message: 'Please, we need your username!' }]"
 				>
-					<a-input v-model:value="formState.username"></a-input>
+					<a-input
+							v-model:value="formState.username"
+							placeholder="Enter your login"
+							autocomplete="username"
+					>
+					</a-input>
 				</a-form-item>
 
 				<a-form-item
@@ -29,7 +34,13 @@
 						name="password"
 						:rules="[{ required: true, message: 'Please, we need your password!' }]"
 				>
-					<a-input-password v-model:value="formState.password"></a-input-password>
+					<a-input-password
+							v-model:value="formState.password"
+							placeholder="Enter your password"
+							autocomplete="password"
+					>
+
+					</a-input-password>
 				</a-form-item>
 
 				<div class="wrapper">
@@ -56,7 +67,7 @@
 import {computed, defineComponent, reactive} from "vue";
 import type {Login} from "@/types/form";
 import AuthService from "@/services/auth.service";
-import {useSubmit} from "@/utils/useSubmit";
+import {useSubmit} from "@/utils/hooks/useSubmit";
 
 export default defineComponent({
 	name: 'LoginForm',
