@@ -1,34 +1,49 @@
 <template>
 	<div :class="$attrs.class">
-		<div>
-			Profile page!
-			<a-button @click="handleLogout" type="warning">
-				Logout
-			</a-button>
-		</div>
+		<main class="container">
+			<section class="container__info">
+				<a-card hoverable>
+					<template #actions>
+						<setting-outlined key="setting"/>
+						<edit-outlined key="edit"/>
+						<ellipsis-outlined key="ellipsis"/>
+					</template>
+					<a-card-meta title="Card title" description="This is the description">
+						<template #avatar>
+							<a-avatar src="https://joeschmoe.io/api/v1/random" style=""/>
+						</template>
+					</a-card-meta>
+				</a-card>
+			</section>
+			<section class="container__statistic">
+				456
+			</section>
+		</main>
 	</div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
-import AuthService from "@/services/auth.service";
-import router from "@/router";
+import {defineComponent, onMounted} from "vue";
+import {SettingOutlined, EditOutlined, EllipsisOutlined} from '@ant-design/icons-vue';
+import userService from "@/services/user.service";
+
 
 export default defineComponent({
-	name: '',
+	name: 'ProfilePage',
+	components: {
+		SettingOutlined,
+		EditOutlined,
+		EllipsisOutlined,
+	},
+
 	setup() {
 
-		const handleLogout = () => AuthService.logout().then(
-				() => {
-					router.push({path: '/login'});
-				},
-				(error) => {
-					// TODO: handle error on logout
-				}
-		);
+		onMounted(() => {
+			userService.getUser().then(console.log)
+
+		})
 
 		return {
-			handleLogout
 		}
 	}
 })
@@ -39,7 +54,14 @@ export default defineComponent({
 @import '../src/style/mixins';
 
 .wrapper {
- @include wrapperNearSidebar;
+	@include wrapperNearSidebar;
+	padding: 10px 20px;
+}
+
+.container {
+	display: grid;
+	grid-template-areas: "s1 s2";
+	grid-template-columns: repeat(2, 1fr);
 }
 
 </style>
