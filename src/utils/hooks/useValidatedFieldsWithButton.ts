@@ -3,7 +3,7 @@ import type {Form} from "@/types/form";
 
 export const useValidatedFieldsWithButton = (validatedFields: Form<boolean>) => {
 
-    const handleValidate = (name: keyof Form<any>, isValidated: boolean) => {
+    const handleValidate = (name: keyof Form<unknown>, isValidated: boolean) => {
         if (isValidated) validatedFields[name] = true;
     };
 
