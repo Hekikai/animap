@@ -1,21 +1,24 @@
 <template>
 	<header class="header">
 		<the-header-logo/>
-		<ul>
-			<li>1</li>
-			<li>2</li>
-		</ul>
+		<div class="header__title">
+			Animap by Katana
+		</div>
+		<logout-button/>
 	</header>
 </template>
 
 <script lang="ts">
 import {defineComponent} from "vue";
 import TheHeaderLogo from "@/components/TheHeaderLogo.vue";
+import LogoutButton from "@/components/auth/LogoutButton.vue";
+
 
 export default defineComponent({
 	name: 'TheHeader',
 	components: {
-		TheHeaderLogo
+		TheHeaderLogo,
+		LogoutButton
 	},
 	setup() {
 
@@ -31,9 +34,16 @@ export default defineComponent({
 	position: sticky;
 	top: 0;
 	display: flex;
+	justify-content: space-between;
 	height: $headerHeight;
 	padding: 8px;
 	background-color: $mainGreen;
 	z-index: 1;
+
+	&__title {
+		align-self: center;
+	}
+
+
 }
 </style>
