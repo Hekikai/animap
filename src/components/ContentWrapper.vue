@@ -10,14 +10,10 @@ import TheHeader from "@/components/TheHeader.vue";
 import TheSidebar from "@/components/TheSidebar.vue";
 
 export default defineComponent({
-	name: '',
+	name: 'ContentWrapper',
 	components: {
 		TheHeader,
 		TheSidebar
-	},
-
-	setup() {
-
 	}
 })
 </script>

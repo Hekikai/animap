@@ -1,5 +1,6 @@
 @import './variables';
 
+
 @mixin modalWindow {
   position: absolute;
   left: 50%;
@@ -12,5 +13,6 @@
 
 @mixin wrapperNearSidebar {
   margin: 0 0 0 $sidebarWidth;
-  min-height: 100%;
+  // TODO: figure out why i can't use $headerHeight instead of 70px
+  min-height: calc(100vh - 70px);
 }
