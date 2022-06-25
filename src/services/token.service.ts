@@ -2,7 +2,6 @@ class TokenService {
     static ACCESS_TOKEN = 'access_token';
     static REFRESH_TOKEN = 'refresh_token';
 
-
     getAccessToken(): string | null {
         return localStorage.getItem(TokenService.ACCESS_TOKEN);
     }

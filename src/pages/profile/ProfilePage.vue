@@ -2,15 +2,22 @@
 	<div :class="$attrs.class">
 		<main class="container">
 			<section class="container__info">
-				<a-card hoverable>
+				<the-spinner v-if="isUserLoaded === false"/>
+				<a-card v-else hoverable style="cursor: auto">
 					<template #actions>
 						<setting-outlined key="setting"/>
 						<edit-outlined key="edit"/>
 						<ellipsis-outlined key="ellipsis"/>
 					</template>
-					<a-card-meta title="Card title" description="This is the description">
+					<a-card-meta
+							:title="store.getUser.username"
+							:description="store.getUser.email"
+					>
 						<template #avatar>
-							<a-avatar src="https://joeschmoe.io/api/v1/random" style=""/>
+							<a-avatar
+									src="src/assets/images/userAvatar.png"
+									style="width: 60px; height: 60px"
+							/>
 						</template>
 					</a-card-meta>
 				</a-card>
@@ -23,9 +30,10 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, onMounted} from "vue";
+import {defineComponent, onMounted, ref} from "vue";
 import {SettingOutlined, EditOutlined, EllipsisOutlined} from '@ant-design/icons-vue';
-import userService from "@/services/user.service";
+import useUserStore from "@/stores/user.store";
+import TheSpinner from "@/components/TheSpinner.vue";
 
 
 export default defineComponent({
@@ -34,16 +42,23 @@ export default defineComponent({
 		SettingOutlined,
 		EditOutlined,
 		EllipsisOutlined,
+		TheSpinner
 	},
 
 	setup() {
 
+		const isUserLoaded = ref(false);
+
+		const store = useUserStore();
+		const {loadUser} = store;
+
+
 		onMounted(() => {
-			userService.getUser().then(console.log)
-
+			loadUser().then(() => isUserLoaded.value = true);
 		})
-
 		return {
+			store,
+			isUserLoaded
 		}
 	}
 })

@@ -5,7 +5,7 @@ class UserService {
     USER = 'user';
 
     getUser() {
-        return handleResponseWithData(axiosInstance.get(`/${this.USER}`))
+        return handleResponseWithData(axiosInstance.get(`/${this.USER}`));
     }
 }
 
