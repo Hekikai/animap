@@ -15,12 +15,12 @@ export default {
 </script>
 
 <script setup lang="ts">
-import TheHeaderLogo from "@/components/TheHeaderLogo.vue";
+import TheHeaderLogo from "@/components/header/TheHeaderLogo.vue";
 import LogoutButton from "@/components/auth/LogoutButton.vue";
 </script>
 
 <style scoped lang="scss">
-@import "../style/variables";
+@import "../../style/variables";
 
 .header {
 	position: sticky;

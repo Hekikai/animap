@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "src/style/variables";
+@import "../../style/variables";
 
 #Layer_1 {
 

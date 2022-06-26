@@ -11,7 +11,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import TheHeader from "@/components/TheHeader.vue";
+import TheHeader from "@/components/header/TheHeader.vue";
 import TheSidebar from "@/components/TheSidebar.vue";
 </script>
 

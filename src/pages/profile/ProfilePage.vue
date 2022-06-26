@@ -2,25 +2,8 @@
 	<div :class="$attrs.class">
 		<main class="container">
 			<section class="container__info">
-				<the-spinner v-if="isUserLoaded === false"/>
-				<a-card v-else hoverable style="cursor: auto">
-					<template #actions>
-						<setting-outlined key="setting"/>
-						<edit-outlined key="edit"/>
-						<ellipsis-outlined key="ellipsis"/>
-					</template>
-					<a-card-meta
-							:title="store.getUser.username"
-							:description="store.getUser.email"
-					>
-						<template #avatar>
-							<a-avatar
-									src="src/assets/images/userAvatar.png"
-									style="width: 60px; height: 60px"
-							/>
-						</template>
-					</a-card-meta>
-				</a-card>
+				<the-spinner v-if="!isFetched"/>
+				<profile-user-info v-else :store="store"/>
 			</section>
 			<section class="container__statistic">
 				456
@@ -36,20 +19,15 @@ export default {
 </script>
 
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
-import {SettingOutlined, EditOutlined, EllipsisOutlined} from '@ant-design/icons-vue';
 import useUserStore from "@/stores/user.store";
-import TheSpinner from "@/components/TheSpinner.vue";
+import {useFetchWithSpinner} from "@/utils/hooks/useFetchWithSpinner";
+import ProfileUserInfo from "@/components/profile/ProfileUserInfo.vue";
 
-const isUserLoaded = ref(false);
+const {toFetch, isFetched, TheSpinner} = useFetchWithSpinner();
 
 const store = useUserStore();
 const {loadUser} = store;
-
-
-onMounted(() => {
-	loadUser().then(() => isUserLoaded.value = true);
-})
+toFetch(loadUser);
 </script>
 
 <style scoped lang="scss">
