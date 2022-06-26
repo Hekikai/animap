@@ -4,7 +4,7 @@
 	<router-view class="wrapper"/>
 </template>
 
-<script>
+<script lang="ts">
 export default {
 	name: 'ContentWrapper'
 }

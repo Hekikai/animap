@@ -4,7 +4,7 @@
 	</a-button>
 </template>
 
-<script>
+<script lang="ts">
 export default {
 	name: 'LogoutButton'
 }
