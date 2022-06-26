@@ -2,18 +2,8 @@
 	<div :class="$attrs.class">
 		<main class="container">
 			<section class="container__info">
-				<a-card hoverable>
-					<template #actions>
-						<setting-outlined key="setting"/>
-						<edit-outlined key="edit"/>
-						<ellipsis-outlined key="ellipsis"/>
-					</template>
-					<a-card-meta title="Card title" description="This is the description">
-						<template #avatar>
-							<a-avatar src="https://joeschmoe.io/api/v1/random" style=""/>
-						</template>
-					</a-card-meta>
-				</a-card>
+				<the-spinner v-if="!isFetched"/>
+				<profile-user-info v-else :store="store"/>
 			</section>
 			<section class="container__statistic">
 				456
@@ -23,30 +13,21 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, onMounted} from "vue";
-import {SettingOutlined, EditOutlined, EllipsisOutlined} from '@ant-design/icons-vue';
-import userService from "@/services/user.service";
+export default {
+	name: 'ProfilePage'
+}
+</script>
 
+<script setup lang="ts">
+import useUserStore from "@/stores/user.store";
+import {useFetchWithSpinner} from "@/utils/hooks/useFetchWithSpinner";
+import ProfileUserInfo from "@/components/profile/ProfileUserInfo.vue";
 
-export default defineComponent({
-	name: 'ProfilePage',
-	components: {
-		SettingOutlined,
-		EditOutlined,
-		EllipsisOutlined,
-	},
+const {toFetch, isFetched, TheSpinner} = useFetchWithSpinner();
 
-	setup() {
-
-		onMounted(() => {
-			userService.getUser().then(console.log)
-
-		})
-
-		return {
-		}
-	}
-})
+const store = useUserStore();
+const {loadUser} = store;
+toFetch(loadUser);
 </script>
 
 <style scoped lang="scss">

@@ -9,26 +9,18 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
-import TheHeaderLogo from "@/components/TheHeaderLogo.vue";
+export default {
+	name: 'ContentWrapper'
+}
+</script>
+
+<script setup lang="ts">
+import TheHeaderLogo from "@/components/header/TheHeaderLogo.vue";
 import LogoutButton from "@/components/auth/LogoutButton.vue";
-
-
-export default defineComponent({
-	name: 'TheHeader',
-	components: {
-		TheHeaderLogo,
-		LogoutButton
-	},
-	setup() {
-
-		return {}
-	}
-})
 </script>
 
 <style scoped lang="scss">
-@import "../style/variables";
+@import "../../style/variables";
 
 .header {
 	position: sticky;

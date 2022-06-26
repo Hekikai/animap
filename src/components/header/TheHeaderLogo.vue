@@ -16,18 +16,16 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+export default {
+	name: 'TheHeaderLogo'
+}
+</script>
 
-export default defineComponent({
-	name: 'TheHeaderLogo',
-	setup() {
-
-	}
-})
+<script setup lang="ts">
 </script>
 
 <style scoped lang="scss">
-@import "src/style/variables";
+@import "../../style/variables";
 
 #Layer_1 {
 

@@ -5,17 +5,14 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
-import TheHeader from "@/components/TheHeader.vue";
-import TheSidebar from "@/components/TheSidebar.vue";
+export default {
+	name: 'ContentWrapper'
+}
+</script>
 
-export default defineComponent({
-	name: 'ContentWrapper',
-	components: {
-		TheHeader,
-		TheSidebar
-	}
-})
+<script setup lang="ts">
+import TheHeader from "@/components/header/TheHeader.vue";
+import TheSidebar from "@/components/TheSidebar.vue";
 </script>
 
 <style scoped>

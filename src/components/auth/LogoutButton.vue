@@ -5,28 +5,24 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+export default {
+	name: 'LogoutButton'
+}
+</script>
+
+<script setup lang="ts">
 import AuthService from "@/services/auth.service";
 import router from "@/router";
 
-export default defineComponent({
-	name: 'LogoutButton',
-	setup() {
-
-		const handleLogout = () => AuthService.logout().then(
-				() => {
-					router.push({path: '/login'});
-				},
-				(error) => {
-					// TODO: handle error on logout
-				}
-		);
-
-		return {
-			handleLogout
+const handleLogout = () => AuthService.logout().then(
+		() => {
+			router.push({path: '/login'});
+		},
+		(error) => {
+			// TODO: handle error on logout
 		}
-	}
-})
+);
+
 </script>
 
 <style scoped>

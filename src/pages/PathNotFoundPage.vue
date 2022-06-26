@@ -7,14 +7,12 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+export default {
+	name: 'PathNotFoundPage'
+}
+</script>
 
-export default defineComponent({
-	name: 'PathNotFoundPage',
-	setup() {
-
-	}
-})
+<script setup lang="ts">
 </script>
 
 <style scoped>

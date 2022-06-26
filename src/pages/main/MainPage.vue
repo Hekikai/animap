@@ -5,14 +5,12 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+export default {
+	name: 'MainPage'
+}
+</script>
 
-export default defineComponent({
-	name: 'MainPage',
-	setup() {
-
-	}
-})
+<script setup lang="ts">
 </script>
 
 <style scoped>
