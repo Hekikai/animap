@@ -29,38 +29,26 @@
 	</div>
 </template>
 
-<script lang="ts">
-import {defineComponent, onMounted, ref} from "vue";
+<script>
+export default {
+	name: 'ProfilePage'
+}
+</script>
+
+<script setup lang="ts">
+import {onMounted, ref} from "vue";
 import {SettingOutlined, EditOutlined, EllipsisOutlined} from '@ant-design/icons-vue';
 import useUserStore from "@/stores/user.store";
 import TheSpinner from "@/components/TheSpinner.vue";
 
+const isUserLoaded = ref(false);
 
-export default defineComponent({
-	name: 'ProfilePage',
-	components: {
-		SettingOutlined,
-		EditOutlined,
-		EllipsisOutlined,
-		TheSpinner
-	},
-
-	setup() {
-
-		const isUserLoaded = ref(false);
-
-		const store = useUserStore();
-		const {loadUser} = store;
+const store = useUserStore();
+const {loadUser} = store;
 
 
-		onMounted(() => {
-			loadUser().then(() => isUserLoaded.value = true);
-		})
-		return {
-			store,
-			isUserLoaded
-		}
-	}
+onMounted(() => {
+	loadUser().then(() => isUserLoaded.value = true);
 })
 </script>
 

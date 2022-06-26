@@ -54,74 +54,63 @@
 	</teleport>
 </template>
 
-<script lang="ts">
-import {defineComponent, reactive} from "vue";
+<script>
+export default {
+	name: 'RegistrationForm'
+}
+</script>
+
+<script setup lang="ts">
+import {reactive} from "vue";
 import type {Registration, ValidatedFields} from "@/types/form";
 import type {Rule} from "ant-design-vue/es/form";
 import AuthService from "@/services/auth.service";
 import {useSubmit} from "@/utils/hooks/useSubmit";
 import {useValidatedFieldsWithButton} from "@/utils/hooks/useValidatedFieldsWithButton";
 
-export default defineComponent({
-	name: 'RegistrationForm',
-	setup() {
+const formState = reactive<Registration>({
+	username: '',
+	password: '',
+	email: '',
+});
 
-		const formState = reactive<Registration>({
-			username: '',
-			password: '',
-			email: '',
-		});
+const areFieldsValidated = reactive<ValidatedFields>({
+	username: false,
+	email: false,
+	password: false
+});
 
-		const areFieldsValidated = reactive<ValidatedFields>({
-			username: false,
-			email: false,
-			password: false
-		});
+const {
+	visible,
+	errorInfo,
+	handleSubmit,
+	handleCloseModal
+} = useSubmit(formState, AuthService.register,
+		'/login', 'Something went wrong...');
 
-		const {
-			visible,
-			errorInfo,
-			handleSubmit,
-			handleCloseModal
-		} = useSubmit(formState, AuthService.register,
-				'/login', 'Something went wrong...');
+const {handleValidate, disabled} = useValidatedFieldsWithButton(areFieldsValidated);
 
-		const {handleValidate, disabled} = useValidatedFieldsWithButton(areFieldsValidated);
-
-		const rules: Record<string, Rule[]> = {
-			username: [{
-				required: true,
-				min: 5,
-				message: 'Must be more than 5 symbols',
-				trigger: 'change'
-			},],
-			email: [{
-				required: true,
-				pattern:
-						/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-				message: 'Incorrect email',
-				trigger: 'change'
-			}],
-			password: [{
-				required: true,
-				min: 5,
-				message: 'Must be more than 5 symbols',
-				trigger: 'change'
-			}],
-		}
-
-		return {
-			formState,
-			disabled,
-			visible,
-			errorInfo,
-			rules,
-			handleSubmit,
-			handleValidate,
-			handleCloseModal
-		};
-	}
-})
+const rules: Record<string, Rule[]> = {
+	username: [{
+		required: true,
+		min: 5,
+		message: 'Must be more than 5 symbols',
+		trigger: 'change'
+	},],
+	email: [{
+		required: true,
+		pattern:
+				/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+		message: 'Incorrect email',
+		trigger: 'change'
+	}],
+	password: [{
+		required: true,
+		min: 5,
+		message: 'Must be more than 5 symbols',
+		trigger: 'change'
+	}],
+}
 </script>
 
 <style scoped lang="scss">

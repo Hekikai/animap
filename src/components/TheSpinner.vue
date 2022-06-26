@@ -4,25 +4,23 @@
 	</div>
 </template>
 
-<script lang="ts">
-import {defineComponent, h} from "vue";
+<script>
+export default {
+	name: 'TheSpinner'
+}
+</script>
+
+<script setup lang="ts">
+import {h} from 'vue';
 import {LoadingOutlined} from '@ant-design/icons-vue';
 
-export default defineComponent({
-	name: 'TheSpinner',
-	setup() {
-		const indicator = h(LoadingOutlined, {
-			style: {
-				fontSize: '100px',
-			},
-			spin: true,
-		});
+const indicator = h(LoadingOutlined, {
+	style: {
+		fontSize: '100px',
+	},
+	spin: true,
+});
 
-		return {
-			indicator,
-		};
-	}
-})
 </script>
 
 <style scoped>

@@ -9,19 +9,16 @@
 	</teleport>
 </template>
 
-<script lang="ts">
-import {defineComponent} from "vue";
+<script>
+export default {
+	name: 'RegistrationForm'
+}
+</script>
 
-export default defineComponent({
-	name: 'RestorePasswordForm',
-	setup() {
-		const handleRedirectHomePage = () => ({path: '/login'});
+<script setup lang="ts">
 
-		return {
-			handleRedirectHomePage
-		}
-	}
-})
+const handleRedirectHomePage = () => ({path: '/login'});
+
 </script>
 
 <style scoped lang="scss">

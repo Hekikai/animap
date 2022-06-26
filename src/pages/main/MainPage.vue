@@ -4,15 +4,13 @@
 	</h2>
 </template>
 
-<script lang="ts">
-import {defineComponent} from "vue";
+<script>
+export default {
+	name: 'MainPage'
+}
+</script>
 
-export default defineComponent({
-	name: 'MainPage',
-	setup() {
-
-	}
-})
+<script setup lang="ts">
 </script>
 
 <style scoped>

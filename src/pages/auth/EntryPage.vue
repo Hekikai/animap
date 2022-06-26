@@ -5,19 +5,14 @@
 	</div>
 </template>
 
-<script lang="ts">
-import {defineComponent} from "vue";
+<script>
+export default {
+	name: 'EntryPage'
+}
+</script>
+
+<script setup lang="ts">
 import backgroundImage from '../../assets/images/background.jpg';
-
-export default defineComponent({
-	name: "EntryPage",
-	setup() {
-		return {
-			backgroundImage
-		}
-	}
-})
-
 </script>
 
 <style scoped lang="scss">

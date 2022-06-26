@@ -63,47 +63,35 @@
 	</teleport>
 </template>
 
-<script lang="ts">
-import {computed, defineComponent, reactive} from "vue";
+<script>
+export default {
+	name: 'LoginForm'
+}
+</script>
+
+<script setup lang="ts">
+import {computed, reactive} from "vue";
 import type {Login} from "@/types/form";
 import AuthService from "@/services/auth.service";
 import {useSubmit} from "@/utils/hooks/useSubmit";
 
-export default defineComponent({
-	name: 'LoginForm',
-
-	setup() {
-
-		const formState = reactive<Login>({
-			username: '',
-			password: ''
-		});
-
-		const {
-			visible,
-			errorInfo,
-			handleSubmit,
-			handleCloseModal
-		} = useSubmit(formState, AuthService.login, '/profile');
-
-		const disabled = computed(() => {
-			return !(formState.username && formState.password);
-		})
-
-		const handleRestorePassword = () => ({path: '/restore'})
-
-		return {
-			formState,
-			visible,
-			errorInfo,
-			disabled,
-			handleRestorePassword,
-			handleSubmit,
-			handleCloseModal
-		};
-	}
+const formState = reactive<Login>({
+	username: '',
+	password: ''
 });
 
+const {
+	visible,
+	errorInfo,
+	handleSubmit,
+	handleCloseModal
+} = useSubmit(formState, AuthService.login, '/profile');
+
+const disabled = computed(() => {
+	return !(formState.username && formState.password);
+})
+
+const handleRestorePassword = () => ({path: '/restore'})
 
 </script>
 

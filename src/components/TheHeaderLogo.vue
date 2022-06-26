@@ -15,15 +15,13 @@
 	</svg>
 </template>
 
-<script lang="ts">
-import {defineComponent} from "vue";
+<script>
+export default {
+	name: 'TheHeaderLogo'
+}
+</script>
 
-export default defineComponent({
-	name: 'TheHeaderLogo',
-	setup() {
-
-	}
-})
+<script setup lang="ts">
 </script>
 
 <style scoped lang="scss">

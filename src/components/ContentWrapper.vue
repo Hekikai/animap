@@ -4,18 +4,15 @@
 	<router-view class="wrapper"/>
 </template>
 
-<script lang="ts">
-import {defineComponent} from "vue";
+<script>
+export default {
+	name: 'ContentWrapper'
+}
+</script>
+
+<script setup lang="ts">
 import TheHeader from "@/components/TheHeader.vue";
 import TheSidebar from "@/components/TheSidebar.vue";
-
-export default defineComponent({
-	name: 'ContentWrapper',
-	components: {
-		TheHeader,
-		TheSidebar
-	}
-})
 </script>
 
 <style scoped>
